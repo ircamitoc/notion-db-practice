@@ -1,6 +1,7 @@
 const express = require("express");
 const { Client } = require("@notionhq/client");
 const cors = require("cors");
+
 var bodyParser = require("body-parser");
 var jsonParser = bodyParser.json();
 
@@ -11,31 +12,23 @@ app.use(cors());
 const PORT = 4000;
 const HOST = "localhost";
 
-const client = new Client({
-  auth: "secret_uojX5Syawr3EyC61AxGettdK69s65pn9kj0gVsqcf2l",
+const notion = new Client({
+  auth: "secret_iCjbDu8ehCJ9p4g9uwCJ2yM8D8CjFqcMf1yRkeluTur",
 });
 
-const databaseID = "057fd1eb2a9c4214bc2953a8332e1d29";
+const databaseId = "0ef7d571605e42a49a64485c0435318b";
 
-// POST request
-// POST name, phoneNumber, extraInfo
-// Functionality: Make a database entry in a Notion page with the databaseID above
 app.post("/submitFormToNotion", jsonParser, async (req, res) => {
-  {
-    name: "";
-    phoneNumber: "";
-    extraInfo: "";
-  }
   const name = req.body.name;
   const phoneNumber = req.body.phoneNumber;
   const extraInfo = req.body.extraInfo;
 
   try {
     const response = await notion.pages.create({
-      parent: { database_ID: databaseID },
+      parent: { database_id: databaseId },
       properties: {
         Name: {
-          rich_text: [
+          title: [
             {
               text: {
                 content: name,
@@ -43,6 +36,7 @@ app.post("/submitFormToNotion", jsonParser, async (req, res) => {
             },
           ],
         },
+
         "Phone Number": {
           rich_text: [
             {
@@ -52,6 +46,7 @@ app.post("/submitFormToNotion", jsonParser, async (req, res) => {
             },
           ],
         },
+
         "Extra Information": {
           rich_text: [
             {
@@ -63,8 +58,9 @@ app.post("/submitFormToNotion", jsonParser, async (req, res) => {
         },
       },
     });
+
     console.log(response);
-    console.log("SUCCESS!");
+    console.log("SUCCESS");
   } catch (error) {
     console.log(error);
   }
