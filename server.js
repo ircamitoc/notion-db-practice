@@ -26,6 +26,48 @@ app.post("/submitFormToNotion", jsonParser, async (req, res) => {
     phoneNumber: "";
     extraInfo: "";
   }
+  const name = req.body.name;
+  const phoneNumber = req.body.phoneNumber;
+  const extraInfo = req.body.extraInfo;
+
+  try {
+    const response = await notion.pages.create({
+      parent: { database_ID: databaseID },
+      properties: {
+        Name: {
+          rich_text: [
+            {
+              text: {
+                content: name,
+              },
+            },
+          ],
+        },
+        "Phone Number": {
+          rich_text: [
+            {
+              text: {
+                content: phoneNumber,
+              },
+            },
+          ],
+        },
+        "Extra Information": {
+          rich_text: [
+            {
+              text: {
+                content: extraInfo,
+              },
+            },
+          ],
+        },
+      },
+    });
+    console.log(response);
+    console.log("SUCCESS!");
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.listen(PORT, HOST, () => {
