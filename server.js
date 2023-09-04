@@ -20,7 +20,7 @@ const databaseId = "0ef7d571605e42a49a64485c0435318b";
 
 app.post("/submitFormToNotion", jsonParser, async (req, res) => {
   const name = req.body.name;
-  const phoneNumber = req.body.phoneNumber;
+  const emailAddress = req.body.emailAddress;
   const extraInfo = req.body.extraInfo;
   const Timestamp = req.body.Timestamp;
 
@@ -38,11 +38,11 @@ app.post("/submitFormToNotion", jsonParser, async (req, res) => {
           ],
         },
 
-        "Phone Number": {
+        "Email Address": {
           rich_text: [
             {
               text: {
-                content: phoneNumber,
+                content: emailAddress,
               },
             },
           ],
