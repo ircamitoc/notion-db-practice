@@ -179,6 +179,7 @@ function App() {
 }
 
 export default App;
+
 */
 
 import React, { useState } from "react";
@@ -202,8 +203,8 @@ function App() {
     e.currentTarget.closest(".input-wrap").classList.remove("focus");
   };
 
-  const submitFormToNotion = (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+  const submitFormToNotion = async (e) => {
+    e.preventDefault();
     const currentTimestamp = new Date().toISOString();
 
     fetch("http://localhost:4000/submitFormToNotion", {
@@ -249,6 +250,7 @@ function App() {
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
             onChange={(e) => setName(e.target.value)}
+            value={name}
           />
           <label>Name</label>
           <i className="icon fa-solid fa-address-card"></i>
@@ -263,6 +265,7 @@ function App() {
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
             onChange={(e) => setEmailAddress(e.target.value)}
+            value={emailAddress}
           />
           <label>Email Address</label>
           <i className="icon fa-solid fa-envelope"></i>
@@ -276,6 +279,7 @@ function App() {
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
             onChange={(e) => setExtraInfo(e.target.value)}
+            value={extraInfo}
           ></textarea>
           <label>Message</label>
           <i className="icon fa-solid fa-inbox"></i>
