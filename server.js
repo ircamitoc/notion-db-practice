@@ -22,6 +22,7 @@ app.post("/submitFormToNotion", jsonParser, async (req, res) => {
   const name = req.body.name;
   const phoneNumber = req.body.phoneNumber;
   const extraInfo = req.body.extraInfo;
+  const Timestamp = req.body.Timestamp;
 
   try {
     const response = await notion.pages.create({
@@ -52,6 +53,16 @@ app.post("/submitFormToNotion", jsonParser, async (req, res) => {
             {
               text: {
                 content: extraInfo,
+              },
+            },
+          ],
+        },
+
+        Timestamp: {
+          rich_text: [
+            {
+              text: {
+                content: Timestamp,
               },
             },
           ],

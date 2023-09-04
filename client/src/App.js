@@ -8,6 +8,8 @@ function App() {
   const [extraInfo, setExtraInfo] = useState("");
 
   function submitFormToNotion() {
+    const currentTimestamp = new Date().toISOString();
+
     fetch("http://localhost:4000/submitFormToNotion", {
       method: "POST", // Use uppercase for the HTTP method
       headers: {
@@ -18,6 +20,7 @@ function App() {
         name: name,
         phoneNumber: phoneNumber,
         extraInfo: extraInfo,
+        Timestamp: currentTimestamp,
       }),
     })
       .then((response) => response.json())
